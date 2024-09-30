@@ -43,6 +43,7 @@ mysqldump -h 10.0.1.24 -u nodeapp -p --databases STUDENTS > data.sql
 
 #Following command imports the data into RDS database. Replace <RDSEndpoint> with the RDS Database endpoint you noted after RDS Database created in earlier steps.
 #when prompted, enter password you provided during the time of database creation
+
 mysql -h students.c3uqqya48jbf.us-east-1.rds.amazonaws.com -u nodeapp -p  STUDENTS < data.sql
 
 #Hướng dẫn deploy Web-app
