@@ -12,9 +12,9 @@ Script-1:
 #<dbname>
 
 aws secretsmanager create-secret \
-    --name Mydbsecret7Student-Website9 \
+    --name Mydbsecret \
     --description "Database secret for web app" \
-    --secret-string "{\"user\":\"phamminhphuong\",\"password\":\"04082004\",\"host\":\"baystudent-website.cbcwmmea6dn5.us-east-1.rds.amazonaws.com\",\"db\":\"7Student-Website9\"}"
+    --secret-string "{\"user\":\"nodeapp\",\"password\":\"12345678\",\"host\":\"student.cb8y2u8wu1zf.us-east-1.rds.amazonaws.com\",\"db\":\"STUDENTS\"}"
 
 Script-2:
 ## Load testing
@@ -27,7 +27,7 @@ npm install -g loadtest
 #Following command performs load testing on the given URL. replace the URL with Loadbalancer (or Public IP of EC2 instance)
 # Press ctrl +C to stop the script
 
-loadtest --rps 1000  -c 500 -k http://54.242.60.103
+loadtest --rps 10000  -c 5000 -k http://ALB-EC2-2106406089.us-east-1.elb.amazonaws.com
 
 
 Script -3:
@@ -39,11 +39,11 @@ Script -3:
 # Replace the <EC2instancePrivateip> with internal IP address of the EC2 instance (CapstonePOC) created in Phase-2 earlier.
 # Provide the password when prompted
 
-mysqldump -h 10.0.2.173 -u phamminhphuong -p --databases 7Student-Website9 > data.sql
+mysqldump -h 10.0.1.24 -u nodeapp -p --databases STUDENTS > data.sql
 
 #Following command imports the data into RDS database. Replace <RDSEndpoint> with the RDS Database endpoint you noted after RDS Database created in earlier steps.
 #when prompted, enter password you provided during the time of database creation
-mysql -h <RDSEndpoint> -u nodeapp -p  STUDENTS < data.sql
+mysql -h students.c3uqqya48jbf.us-east-1.rds.amazonaws.com -u nodeapp -p  STUDENTS < data.sql
 
 #Hướng dẫn deploy Web-app
 
